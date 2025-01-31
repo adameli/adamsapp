@@ -8,7 +8,6 @@ export async function generateMetadata() {
 
   // fetch data - the about page
   const { page } = await getPageMeta('home')
-  console.log(page);
 
   return metaDataObject(page)
 }

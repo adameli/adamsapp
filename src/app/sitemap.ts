@@ -5,7 +5,6 @@ import { env } from '@/env'
 interface Page {
     slug: string
     modified: string
-    uri: string
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -16,7 +15,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             nodes {
                 slug
                 modified
-                uri
             }
         }
     }
@@ -25,8 +23,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const data = await fetchApi(query)
 
     const pages = data.data.pages.nodes.map((page: Page) => {
+
+        const url = page.slug === 'home' ? env.NEXT_PUBLIC_URL : `${env.NEXT_PUBLIC_URL}/${page.slug}`
+
         return {
-            url: `${env.NEXT_PUBLIC_URL}${page.uri}`,
+            url,
             lastModified: new Date(page.modified),
             priority: 1
         }

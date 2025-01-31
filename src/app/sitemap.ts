@@ -1,24 +1,36 @@
+import fetchApi from '@/lib/graphql/client'
 import type { MetadataRoute } from 'next'
+import { env } from '@/env'
 
-export default function sitemap(): MetadataRoute.Sitemap {
-    return [
-        {
-            url: 'https://acme.com',
-            lastModified: new Date(),
-            changeFrequency: 'yearly',
-            priority: 1,
-        },
-        {
-            url: 'https://acme.com/about',
-            lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 0.8,
-        },
-        {
-            url: 'https://acme.com/blog',
-            lastModified: new Date(),
-            changeFrequency: 'weekly',
-            priority: 0.5,
-        },
-    ]
+interface Page {
+    slug: string
+    modified: string
+    uri: string
+}
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+
+    const query = `
+    query pages {
+        pages {
+            nodes {
+                slug
+                modified
+                uri
+            }
+        }
+    }
+  `
+
+    const data = await fetchApi(query)
+
+    const pages = data.data.pages.nodes.map((page: Page) => {
+        return {
+            url: `${env.NEXT_PUBLIC_URL}${page.uri}`,
+            lastModified: new Date(page.modified),
+            priority: 1
+        }
+    })
+
+    return pages
 }

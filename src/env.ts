@@ -6,9 +6,11 @@ export const env = createEnv({
         DATABASE_URL: z.string().url(),
     },
     client: {
+        NEXT_PUBLIC_URL: z.string().url(),
     },
     // If you're using Next.js < 13.4.4, you'll need to specify the runtimeEnv manually
     runtimeEnv: {
         DATABASE_URL: process.env.DATABASE_URL,
+        NEXT_PUBLIC_URL: process.env.NEXT_PUBLIC_URL,
     },
 });

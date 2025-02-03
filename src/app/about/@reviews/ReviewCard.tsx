@@ -10,7 +10,7 @@ export default function ReviewCard() {
         queryKey: ['reviews'],
         queryFn: getReview,
         // refetchOnMount: true,
-        refetchInterval: 3000,
+        // refetchInterval: 3000,
     })
 
     const user = data[0]

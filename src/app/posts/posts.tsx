@@ -11,6 +11,7 @@ import PostCard from "@/components/ui/PostCard";
 
 // Post interface
 import { Post } from "@/types/globals";
+import Loading from "../loading";
 // import { env } from "@/env";
 
 
@@ -39,7 +40,7 @@ export function PostPagination({ cursor, page, is }: { cursor: string | null, pa
         placeholderData: keepPreviousData,
     })
 
-    if (isLoading) return <div className='flex justify-center my-20'><h1>LOADING POSTS...</h1></div>
+    if (isLoading) return <Loading />
     if (isError) return notFound();
 
     // console.log(data);

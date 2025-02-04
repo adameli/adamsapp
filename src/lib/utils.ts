@@ -56,3 +56,7 @@ function cleanUrl(url: string) {
   }
   return url
 }
+
+export async function wait() {
+  return await new Promise((resolve) => { setTimeout(resolve, 3000) })
+}

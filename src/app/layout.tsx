@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Roboto } from "next/font/google";
 import "./globals.css";
-import Link from "next/link";
 import Providers from "./providers";
+import Navbar from "@/components/ui/Navbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -41,26 +41,16 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${roboto.className} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${roboto.className} antialiased relative`}
       >
         {/* Header with Navigation */}
-        <header className="bg-gray-800 text-white p-4">
-          <nav>
-            <ul className="flex space-x-4">
-              <li>
-                <Link href="/">Home</Link>
-              </li>
-              <li>
-                <Link href="/posts">Posts</Link>
-              </li>
-              <li>
-                <Link href="/about">About</Link>
-              </li>
-            </ul>
-          </nav>
+        <header className="bg-gray-800 text-white p-4 max-md:fixed w-full z-10 top-0">
+          <Navbar />
         </header>
 
         <Providers>{children}</Providers>

@@ -8,8 +8,8 @@ export default function aboutLayout({ children, teamInfo, reviews }: { children:
         <section className="flex">
             {children}
 
-            <aside className="flex flex-col items-center w-1/4 bg-gray-800 text-white p-4">
-                <section className='fixed flex flex-col gap-10 items-center'>
+            <aside className=" flex flex-col items-center w-1/4 bg-gray-800 text-white p-4">
+                <section className='  fixed flex flex-col gap-10 items-center'>
 
                     {teamInfo}
                     {reviews}
